@@ -8,22 +8,22 @@ local config = {
   severity_sort = true,
   float = {
     focusable = true,
-    style = "minimal",
-    border = "rounded",
-    source = "always",
-    header = "",
-    prefix = "",
+    style = 'minimal',
+    border = 'rounded',
+    source = 'always',
+    header = '',
+    prefix = '',
   },
 }
 
 vim.diagnostic.config(config)
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = "rounded",
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = 'rounded',
 })
 
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = "rounded",
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+  border = 'rounded',
 })
 
 --  This function gets run when an LSP connects to a particular buffer.
@@ -69,9 +69,8 @@ local on_attach = function(_, bufnr)
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 
-  nmap('<leader>F', "<cmd>Format<CR>", "[F]ormat buffer")
+  nmap('<leader>F', '<cmd>Format<CR>', '[F]ormat buffer')
 end
-
 
 -- document existing key chains
 require('which-key').register {
@@ -97,16 +96,16 @@ require('mason').setup()
 require('mason-lspconfig').setup()
 
 -- add null-ls for formatters such as black
-require("mason-null-ls").setup({
-  ensure_installed = { 'stylua', 'jq', "black", "ruff" },
+require('mason-null-ls').setup {
+  ensure_installed = { 'stylua', 'jq', 'black', 'ruff' },
   handlers = {},
-})
+}
 
-require("null-ls").setup({
+require('null-ls').setup {
   sources = {
     -- Anything not supported by mason.
-  }
-})
+  },
+}
 
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -116,7 +115,7 @@ require("null-ls").setup({
 --
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
-local rust_lsp_settings = require('custom.lsp.settings.rust_analyzer')
+local rust_lsp_settings = require 'custom.lsp.settings.rust_analyzer'
 local servers = {
   -- clangd = {},
   -- gopls = {},
@@ -151,22 +150,22 @@ mason_lspconfig.setup {
 
 mason_lspconfig.setup_handlers {
   function(server_name)
-    if server_name == "rust_analyzer" then
-      local status_ok, rt = pcall(require, "rust-tools")
+    if server_name == 'rust_analyzer' then
+      local status_ok, rt = pcall(require, 'rust-tools')
       if not status_ok then
-        print("Rust tools not installed")
+        print 'Rust tools not installed'
         return
       end
-      rt.setup({
+      rt.setup {
         server = {
           capabilities = capabilities,
           on_attach = on_attach,
           settings = servers[server_name],
           filetypes = (servers[server_name] or {}).filetypes,
         },
-        tools = rust_lsp_settings.tools,
-        dap = rust_lsp_settings.dap,
-      })
+        tools = rust_lsp_settings.tools.tools,
+        dap = rust_lsp_settings.dap.dap,
+      }
     else
       require('lspconfig')[server_name].setup {
         capabilities = capabilities,
@@ -175,5 +174,5 @@ mason_lspconfig.setup_handlers {
         filetypes = (servers[server_name] or {}).filetypes,
       }
     end
-  end
+  end,
 }
