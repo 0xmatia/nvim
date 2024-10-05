@@ -1,5 +1,4 @@
 -- See `:help cmp`
-
 local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
@@ -38,13 +37,15 @@ kind_icons = {
 
 local function format(entry, item)
   local MAX_LABEL_WIDTH = 55
-  local function whitespace(max, len) return (' '):rep(max - len) end
+  local function whitespace(max, len)
+    return (' '):rep(max - len)
+  end
   -- Limit content width.
   local content = item.abbr
   if #content > MAX_LABEL_WIDTH then
-      item.abbr = vim.fn.strcharpart(content, 0, MAX_LABEL_WIDTH) .. '…'
+    item.abbr = vim.fn.strcharpart(content, 0, MAX_LABEL_WIDTH) .. '…'
   else
-      item.abbr = content .. whitespace(MAX_LABEL_WIDTH, #content)
+    item.abbr = content .. whitespace(MAX_LABEL_WIDTH, #content)
   end
 
   -- Replace kind with icons.
@@ -52,14 +53,14 @@ local function format(entry, item)
 
   -- Remove gibberish.
   item.menu = ({
-    nvim_lsp = "[LSP]",
-    nvim_lua = "[LUA]",
-    crates = "[Crates]",
-    luasnip = "[Snippet]",
-    buffer = "[Buffer]",
-    path = "[Path]",
-    dap = "[DAP]",
-})[entry.source.name]
+    nvim_lsp = '[LSP]',
+    nvim_lua = '[LUA]',
+    crates = '[Crates]',
+    luasnip = '[Snippet]',
+    buffer = '[Buffer]',
+    path = '[Path]',
+    dap = '[DAP]',
+  })[entry.source.name]
   return item
 end
 
@@ -109,34 +110,41 @@ cmp.setup {
 
   formatting = {
     format = format,
-    fields = { 'kind', 'abbr', 'menu'},
+    fields = { 'kind', 'abbr', 'menu' },
   },
 
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = "path" },
-    { name = "buffer" },
+    { name = 'path' },
+    { name = 'buffer' },
   },
 }
-
 
 -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline({ '/', '?' }, {
   mapping = cmp.mapping.preset.cmdline(),
+  preselect = cmp.PreselectMode.None,
+  completion = {
+    completeopt = 'menu,menuone,noselect',
+  },
   sources = {
-      { name = 'buffer' }
-  }
+    { name = 'buffer' },
+  },
 })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
   mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources{
-      { name = 'path' },
-      { name = 'cmdline' }
-  }
+  preselect = cmp.PreselectMode.None,
+  completion = {
+    completeopt = 'menu,menuone,noselect',
+  },
+  sources = cmp.config.sources {
+    { name = 'path' },
+    { name = 'cmdline' },
+  },
 })
 
 -- Change hover window background color to match actual background color
-vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
+vim.api.nvim_set_hl(0, 'NormalFloat', { link = 'Normal' })

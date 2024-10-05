@@ -87,11 +87,11 @@ require('lazy').setup({
       'williamboman/mason-lspconfig.nvim',
 
       {
-        "jay-babu/mason-null-ls.nvim",
-        event = { "BufReadPre", "BufNewFile" },
+        'jay-babu/mason-null-ls.nvim',
+        event = { 'BufReadPre', 'BufNewFile' },
         dependencies = {
-          "jose-elias-alvarez/null-ls.nvim",
-        }
+          'jose-elias-alvarez/null-ls.nvim',
+        },
       },
 
       -- Useful status updates for LSP
@@ -102,7 +102,7 @@ require('lazy').setup({
       'folke/neodev.nvim',
 
       -- More rust specific stuff
-      { 'simrat39/rust-tools.nvim' }
+      { 'simrat39/rust-tools.nvim' },
     },
   },
 
@@ -221,14 +221,14 @@ require('lazy').setup({
     'ellisonleao/gruvbox.nvim',
     priority = 1000,
     config = function()
-      require("gruvbox").setup({
-        contrast = "hard", -- can be "hard", "soft" or empty string
+      require('gruvbox').setup {
+        contrast = 'hard', -- can be "hard", "soft" or empty string
         overrides = {
-          NvimTreeNormal = { bg = "#151515" },
-          NormalFloat    = { link = 'Normal' },
-          FloatBorder    = { bg = 'None' }
+          NvimTreeNormal = { bg = '#151515' },
+          NormalFloat = { link = 'Normal' },
+          FloatBorder = { bg = 'None' },
         },
-      })
+      }
       vim.cmd.colorscheme 'gruvbox'
     end,
   },
@@ -236,8 +236,8 @@ require('lazy').setup({
   -- autopairs
   {
     'windwp/nvim-autopairs',
-    event = "InsertEnter",
-    opts = {} -- this is equalent to setup({}) function
+    event = 'InsertEnter',
+    opts = {}, -- this is equalent to setup({}) function
   },
 
   {
@@ -268,27 +268,27 @@ require('lazy').setup({
 
   -- fancy TODO comments
   {
-    "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    'folke/todo-comments.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {
       -- your configuration comes here
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
-    }
+    },
   },
 
   {
     'rcarriga/nvim-notify',
     config = function()
-      vim.notify = require('notify')
-    end
+      vim.notify = require 'notify'
+    end,
   },
 
   -- illuminate word under cursor
   {
     'RRethy/vim-illuminate',
     config = function()
-      require('illuminate').configure({
+      require('illuminate').configure {
         filetypes_denylist = {
           'dirbuf',
           'dirvish',
@@ -296,8 +296,8 @@ require('lazy').setup({
           'alpha',
           'NvimTree',
         },
-      })
-    end
+      }
+    end,
   },
 
   -- Fuzzy Finder (files, lsp, etc)
@@ -326,7 +326,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
       'nvim-treesitter/nvim-treesitter-textobjects',
-      'nvim-treesitter/nvim-treesitter-context'
+      'nvim-treesitter/nvim-treesitter-context',
     },
     build = ':TSUpdate',
   },
@@ -337,32 +337,34 @@ require('lazy').setup({
   -- bufferline
   {
     'akinsho/bufferline.nvim',
-    version = "*",
+    version = '*',
     dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
       require('bufferline').setup {
         options = {
-          offsets = { {
-            filetype = "neo-tree",
-            text = "File Explorer",
-            separator = true,
-            text_align = "left"
-          } }
-        }
+          offsets = {
+            {
+              filetype = 'neo-tree',
+              text = 'File Explorer',
+              separator = true,
+              text_align = 'left',
+            },
+          },
+        },
       }
-    end
+    end,
   },
 
   -- Project managment
   {
-    "ahmedkhalf/project.nvim",
+    'ahmedkhalf/project.nvim',
     config = function()
-      require("project_nvim").setup {
+      require('project_nvim').setup {
         -- your configuration comes here
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
       }
-    end
+    end,
   },
 
   -- startup screen
@@ -375,7 +377,7 @@ require('lazy').setup({
   require 'custom.plugins.debug',
 
   -- File tree
-  require 'custom.plugins.filetree'
+  require 'custom.plugins.filetree',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
