@@ -118,7 +118,7 @@ require('null-ls').setup {
 --  define the property 'filetypes' to the map in question.
 local rust_lsp_settings = require 'custom.lsp.settings.rust_analyzer'
 local servers = {
-  -- clangd = {},
+  clangd = {},
   -- gopls = {},
   pyright = {},
   rust_analyzer = rust_lsp_settings.settings,

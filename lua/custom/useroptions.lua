@@ -49,10 +49,10 @@ vim.opt.showmatch = true
 vim.opt.autoindent = true
 
 -- popup menu hight
-vim.opt.pumheight = 10 
+vim.opt.pumheight = 10
 
 -- highlight line
-vim.opt.cursorline = true 
+vim.opt.cursorline = true
 
 -- smart indentation
 vim.opt.smartindent = true
@@ -60,11 +60,14 @@ vim.opt.smartindent = true
 -- always split below
 vim.opt.splitbelow = true
 
--- always split to the right 
-vim.opt.splitright = true 
+-- always split to the right
+vim.opt.splitright = true
 
 -- persistent undo
 vim.opt.undofile = true
 
 -- tab as 4 spaces
 vim.opt.tabstop = 4
+
+-- don't change directory automatically
+vim.opt.autochdir = false
